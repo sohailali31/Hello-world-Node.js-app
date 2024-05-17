@@ -33,7 +33,7 @@ jobs:
         PUBLIC_IP=13.232.155.115
 
          # Replace 'your-key-pair.pem' with the path to your private key file (mykey.pem)
-        PRIVATE_KEY="mykey.pem"
+        PRIVATE_KEY="/root/mykey.pem"
 
         # Transfer files
         scp -o StrictHostKeyChecking=no -i "$PRIVATE_KEY" app.js ec2-user@$PUBLIC_IP:/home/ec2-user/app.js
