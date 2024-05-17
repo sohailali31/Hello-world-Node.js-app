@@ -27,10 +27,13 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         # Replace with the public IP of your instance
-        PUBLIC_IP=$(terraform output -raw instance_public_ip)
-        
+        PUBLIC_IP=35.89.132.149
+        # Replace 'your-key-pair.pem' with the path to your private key file (mykey.pem)
+        PRIVATE_KEY="/root/mykey.pem"
+
         # Transfer files
-        scp -o StrictHostKeyChecking=no -i your-key-pair.pem app.js ec2-user@$PUBLIC_IP:/home/ec2-user/app.js
-        
+        scp -o StrictHostKeyChecking=no -i "$PRIVATE_KEY" app.js ec2-user@$PUBLIC_IP:/home/ec2-user/app.js
+
         # Restart Node.js app on the server
-        ssh -o StrictHostKeyChecking=no -i your-key-pair.pem ec2-user@$PUBLIC_IP 'pkill node; nohup node /home/ec2-user/app.js &'
+        ssh -o StrictHostKeyChecking=no -i "$PRIVATE_KEY" ec2-user@$PUBLIC_IP 'pkill node; nohup node /home/ec2-user/app.js &'
+       
