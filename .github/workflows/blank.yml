@@ -1,0 +1,36 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy to EC2
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        # Replace with the public IP of your instance
+        PUBLIC_IP=$(terraform output -raw instance_public_ip)
+        
+        # Transfer files
+        scp -o StrictHostKeyChecking=no -i your-key-pair.pem app.js ec2-user@$PUBLIC_IP:/home/ec2-user/app.js
+        
+        # Restart Node.js app on the server
+        ssh -o StrictHostKeyChecking=no -i your-key-pair.pem ec2-user@$PUBLIC_IP 'pkill node; nohup node /home/ec2-user/app.js &'
