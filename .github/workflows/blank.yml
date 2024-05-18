@@ -30,7 +30,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         # Replace with the public IP of your instance
-        PUBLIC_IP=54.214.109.14
+        PUBLIC_IP=54.214.109.14 
 
          # Replace 'your-key-pair.pem' with the path to your private key file (mykey.pem)
         PRIVATE_KEY= ${{ secrets.KEY_PAIR }}
