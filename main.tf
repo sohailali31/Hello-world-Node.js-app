@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "us-west-2" # Specify your desired region
+  region = "ap-south-1" # Specify your desired region
 }
 
 resource "aws_instance" "hello_world" {
-  ami           = "ami-01cd4de4363ab6ee8" # Amazon Linux 2 AMI (Replace with your desired AMI)
+  ami           = "ami-0e4fd655fb4e26c30" # Amazon Linux 2 AMI (Replace with your desired AMI)
   instance_type = "t2.micro"
 
   user_data = <<-EOF
