@@ -31,7 +31,7 @@ jobs:
         PRIVATE_KEY: ${{ secrets.KEY_PAIR }}
       run: |
         # Replace with the public IP of your instance
-        PUBLIC_IP=54.214.109.14 
+        PUBLIC_IP=54.214.109.14
 
         echo "${PRIVATE_KEY}" > mykey.pem
         chmod 600 mykey.pem
