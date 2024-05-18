@@ -28,11 +28,12 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
         # Replace with the public IP of your instance
         PUBLIC_IP=54.214.109.14 
 
-        echo "${ secrets.KEY_PAIR }" > mykey.pem
+        echo "${PRIVATE_KEY}" > mykey.pem
         chmod 600 mykey.pem
 
         # Transfer files
